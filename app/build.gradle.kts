@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId = "mg.fanaoka.app"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 32
         versionCode = 1
         versionName = "0.1.1"
     }
