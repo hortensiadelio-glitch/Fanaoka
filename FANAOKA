@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123b32">
+  <meta name="description" content="Fanaoka : une application Android gratuite pour limiter les publicités et économiser les données mobiles.">
+  <title>Fanaoka — Stop pub</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f7f5;
+      color: #20352e;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #123b32;
+      color: white;
+      text-align: center;
+      padding: 45px 20px;
+    }
+
+    header h1 {
+      font-size: 38px;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 18px;
+      margin: 8px 0 0;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 0 18px;
+    }
+
+    section {
+      background: white;
+      padding: 22px;
+      margin-bottom: 18px;
+      border-radius: 12px;
+    }
+
+    h2 {
+      color: #17634e;
+      margin-top: 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .status {
+      background: #e6f2eb;
+      padding: 14px;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #64756d;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>FANAOKA</h1>
+    <p>STOP PUB — Économisez vos données mobiles.</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Notre mission</h2>
+      <p>
+        Fanaoka est un projet d'application Android gratuite
+        destiné à réduire la consommation Internet et à limiter
+        les publicités intrusives et les traceurs.
+      </p>
+    </section>
+
+    <section>
+      <h2>Nos objectifs</h2>
+      <ul>
+        <li>Économiser les données mobiles.</li>
+        <li>Limiter les publicités intrusives.</li>
+        <li>Améliorer la protection de la vie privée.</li>
+        <li>Rester accessible aux téléphones Android modestes.</li>
+        <li>Ne demander aucun abonnement ni paiement.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Nos engagements</h2>
+      <ul>
+        <li>Aucune publicité intégrée à Fanaoka.</li>
+        <li>Pas de collecte inutile de données personnelles.</li>
+        <li>Pas de collecte d'historique de navigation.</li>
+        <li>Pas d'interception ni de déchiffrement HTTPS.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>État du développement</h2>
+      <div class="status">
+        <strong>Version : Alpha 0.1</strong>
+        <p>
+          Le moteur de filtrage est encore en développement.
+          Les fonctions de blocage et les économies de données
+          devront être vérifiées par des tests réels.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projet indépendant</h2>
+      <p>
+        Fanaoka est un projet indépendant, gratuit et destiné
+        à évoluer progressivement avec ses utilisateurs.
+      </p>
+      <p>
+        Appareil de référence : Itel A665L — Android 13.<br>
+        Réseau de référence : Telma — Madagascar.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    Fanaoka — Stop pub<br>
+    Projet gratuit — Madagascar
+  </footer>
+
+</body>
+</html>
