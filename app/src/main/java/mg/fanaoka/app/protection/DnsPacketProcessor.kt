@@ -17,7 +17,7 @@ internal object DnsPacketProcessor {
         if (packet.size < 28 || (packet[0].toInt() ushr 4 and 0x0f) != 4) return null
         val ihl = (packet[0].toInt() and 0x0f) * 4
         if (ihl < 20 || packet.size < ihl + 8 + 12) return null
-        if (packet[9].toInt() and 0xff != 17) return null
+        if ((packet[9].toInt() and 0xff) != 17) return null
         val udpLength = u16(packet, ihl + 4)
         if (udpLength < 20 || packet.size < ihl + udpLength) return null
         val sourcePort = u16(packet, ihl)
@@ -37,7 +37,7 @@ internal object DnsPacketProcessor {
         while (i < dns.size) {
             val size = dns[i++].toInt() and 0xff
             if (size == 0) break
-            if (size and 0xc0 != 0 || size > 63 || i + size > dns.size) return null
+            if ((size and 0xc0) != 0 || size > 63 || i + size > dns.size) return null
             labels += String(dns, i, size, Charsets.US_ASCII).lowercase()
             i += size
         }
@@ -65,7 +65,7 @@ internal object DnsPacketProcessor {
         while (i < dns.size) {
             val n = dns[i++].toInt() and 0xff
             if (n == 0) return (i + 4).coerceAtMost(dns.size)
-            if (n and 0xc0 != 0 || n > 63 || i + n > dns.size) return dns.size
+            if ((n and 0xc0) != 0 || n > 63 || i + n > dns.size) return dns.size
             i += n
         }
         return dns.size
