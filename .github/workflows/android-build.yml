@@ -1,30 +1,69 @@
 name: Android build
+
 on:
   push:
     branches: [main, "hortensiadelio-glitch-patch-1"]
+    tags: ["v*"]
   pull_request:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: fanaoka-android-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
+    name: Build and package Android APK
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
+
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.9"
+
+      - name: Read app version
+        id: meta
+        shell: bash
+        run: |
+          VERSION_NAME="$(sed -nE 's/^[[:space:]]*versionName[[:space:]]*=[[:space:]]*"([^"]+)".*/\1/p' app/build.gradle.kts | head -n1)"
+          if [ -z "$VERSION_NAME" ]; then
+            echo "Unable to read versionName from app/build.gradle.kts"
+            exit 1
+          fi
+          echo "version_name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
+          echo "artifact_name=fanaoka-alpha-$VERSION_NAME-debug" >> "$GITHUB_OUTPUT"
+
       - name: Build debug APK
         run: gradle --no-daemon assembleDebug
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+
+      - name: Verify APK and generate SHA-256
+        shell: bash
+        run: |
+          APK="app/build/outputs/apk/debug/app-debug.apk"
+          test -s "$APK"
+          sha256sum "$APK" | tee "$APK.sha256"
+
+      - name: Upload APK and checksum
+        uses: actions/upload-artifact@v5
         with:
-          name: fanaoka-alpha-0.1.2-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: ${{ steps.meta.outputs.artifact_name }}
+          path: |
+            app/build/outputs/apk/debug/app-debug.apk
+            app/build/outputs/apk/debug/app-debug.apk.sha256
+          if-no-files-found: error
+          retention-days: 14
