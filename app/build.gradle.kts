@@ -10,8 +10,8 @@ android {
         applicationId = "mg.fanaoka.app"
         minSdk = 26
         targetSdk = 32
-        versionCode = 1
-        versionName = "0.1.1"
+        versionCode = 2
+        versionName = "0.1.2"
     }
     buildFeatures { compose = true }
     compileOptions {
